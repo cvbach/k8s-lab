@@ -1,19 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deploy
+  name: hpa-demo
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: nginx
+      app: hpa
   template:
     metadata:
       labels:
-        app: nginx
+        app: hpa
     spec:
       containers:
       - name: nginx
         image: nginx
+        resources:
+          requests:
+            cpu: 100m
         ports:
         - containerPort: 80
